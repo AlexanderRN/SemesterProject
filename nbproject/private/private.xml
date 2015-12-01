@@ -4,8 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="a"/>
         <group>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/facades/UserFacade.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/web/index.html</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/deploy/DeploymentConfiguration.java</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/facades/UserFacade.java</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/conf/MANIFEST.MF</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/rest/Admin.java</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/META-INF/context.xml</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/entity/Role.java</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/entity/User.java</file>
         </group>
     </open-files>
 </project-private>

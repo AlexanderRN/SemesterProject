@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/semesterSeedSP">
-  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="test" password="root" type="javax.sql.DataSource" url="jdbc:mysql://localhost:8889/test?zeroDateTimeBehavior=convertToNull" username="root"/>
+  <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="test" password="root" type="javax.sql.DataSource" url="jdbc:mysql://web28.meebox.net:3306/baekkega_cphima?zeroDateTimeBehavior=convertToNull" username="baekkega_cphimau"/>
 </Context>

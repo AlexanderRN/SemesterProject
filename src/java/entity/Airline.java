@@ -7,7 +7,10 @@ package entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +24,8 @@ import javax.persistence.OneToMany;
 public class Airline implements Serializable {
     @Id
     private String name;
-//    @OneToMany(mappedBy = "airline")
-//    private ArrayList<Flight> airplanes;
+    @OneToMany(mappedBy = "airline", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    private List<Flight> airplanes = new ArrayList();
     
     public Airline() {
     }

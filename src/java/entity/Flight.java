@@ -27,12 +27,14 @@ public class Flight implements Serializable {
     @Id
     private String flightId;
     private int numberOfSeats;
+    
     @ManyToOne
     @JoinColumn(name="Airline_ID")
     private Airline airline;
-//    
+    
     @OneToMany(mappedBy = "flight", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Flightinstance> flightinstances = new ArrayList();
+
 
     public Flight() {
     }

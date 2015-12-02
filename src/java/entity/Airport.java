@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
  *
  * @author AlexanderNielsen
  */
+
 @Entity
 public class Airport implements Serializable {
     @Id

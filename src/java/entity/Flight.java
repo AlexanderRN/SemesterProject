@@ -23,11 +23,11 @@ public class Flight implements Serializable {
     @Id
     private String flightId;
     private int numberOfSeats;
-    @ManyToOne
-    private Airline airline;
-    
-    @OneToMany(mappedBy = "flight")
-    private ArrayList<Flightinstance> flightinstances;
+//    @ManyToOne
+//    private Airline airline;
+//    
+//    @OneToMany(mappedBy = "flight")
+//    private ArrayList<Flightinstance> flightinstances;
 
     public Flight() {
     }

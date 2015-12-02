@@ -29,15 +29,13 @@ public class Flightinstance implements Serializable {
     private int numberOfSeats;
     private double totalPrice;
     private int travelTime;
-    @OneToOne
     private Airport origin;
-    @OneToOne
     private Airport destination;
-    @ManyToOne
-    private Flight flight;
-    
-    @OneToMany(mappedBy = "flightinstance")
-    ArrayList<Reservation> reservations; 
+//    @ManyToOne
+//    private Flight flight;
+//    
+//    @OneToMany(mappedBy = "flightinstance")
+//    ArrayList<Reservation> reservations; 
 
 
     public Flightinstance() {

@@ -26,10 +26,10 @@ public class Reservation implements Serializable {
     private Long id;
     private Double price;
     
-    @OneToMany(mappedBy = "reservation")
-    private ArrayList<Passenger> passengers;
-    @ManyToOne
-    private Flightinstance flightinstance;
+//    @OneToMany(mappedBy = "reservation")
+//    private ArrayList<Passenger> passengers;
+//    @ManyToOne
+//    private Flightinstance flightinstance;
 
     public Reservation() {
     }

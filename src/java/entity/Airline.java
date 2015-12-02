@@ -21,8 +21,8 @@ import javax.persistence.OneToMany;
 public class Airline implements Serializable {
     @Id
     private String name;
-    @OneToMany(mappedBy = "airline")
-    private ArrayList<Flight> airplanes;
+//    @OneToMany(mappedBy = "airline")
+//    private ArrayList<Flight> airplanes;
     
     public Airline() {
     }

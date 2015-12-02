@@ -19,8 +19,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Passenger implements Serializable {
     @Id
-    @ManyToOne
-    private Reservation reservation;
+//    @ManyToOne
+//    private Reservation reservation;
     
     private String firstName;
     private String lastName;

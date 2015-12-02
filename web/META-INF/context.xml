@@ -2,3 +2,4 @@
 <Context antiJARLocking="true" path="/semesterSeedSP">
   <Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="20" maxIdle="10" maxWait="-1" name="test" password="cphIma2011" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/test?zeroDateTimeBehavior=convertToNull" username="test"/>
 </Context>
+ 

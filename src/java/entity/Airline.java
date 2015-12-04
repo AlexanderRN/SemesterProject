@@ -15,12 +15,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author AlexanderNielsen
  */
 @Entity
+@Table(name="airline")
 public class Airline implements Serializable {
     @Id
     private String name;
@@ -33,7 +35,7 @@ public class Airline implements Serializable {
     public Airline(String name) {
         this.name = name;
     }
-
+    
     public String getName() {
         return name;
     }

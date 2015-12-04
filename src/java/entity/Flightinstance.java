@@ -18,12 +18,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author AlexanderNielsen
  */
 @Entity
+@Table(name="Flightinstance")
 public class Flightinstance implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,7 +41,7 @@ public class Flightinstance implements Serializable {
     @JoinColumn(name="Flight_ID")
     private Flight flight;
     
-    @OneToMany(mappedBy = "flightinstance", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "Flightinstance", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Reservation> reservations = new ArrayList(); 
 
 
@@ -110,6 +112,27 @@ public class Flightinstance implements Serializable {
 
     public void setDestination(Airport destination) {
         this.destination = destination;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    @Override
+    public String toString() {
+        return "Flightinstance{" + "id=" + id + ", flightDate=" + flightDate + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", travelTime=" + travelTime + ", origin=" + origin + ", destination=" + destination + ", flight=" + flight + ", reservations=" + reservations + '}';
     }
     
     

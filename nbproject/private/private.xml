@@ -3,16 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="a"/>
-        <group>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Airline.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Passenger.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/conf/persistence.xml</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Reservation.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/web/META-INF/context.xml</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Flight.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Airport.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Flightinstance.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/deploy/DeploymentConfiguration.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -17,12 +17,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author AlexanderNielsen
  */
 @Entity
+@Table(name="reservation")
 public class Reservation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

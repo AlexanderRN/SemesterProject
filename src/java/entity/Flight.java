@@ -17,12 +17,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author AlexanderNielsen
  */
 @Entity
+@Table(name="flight")
 public class Flight implements Serializable {
     @Id
     private String flightId;
@@ -58,6 +60,14 @@ public class Flight implements Serializable {
 
     public void setNumberOfSeats(int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
   
     

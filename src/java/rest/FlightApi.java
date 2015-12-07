@@ -4,9 +4,13 @@ package rest;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonWriter;
 import entity.Flightinstance;
 import facades.FlightFacade;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -18,7 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 
 
-@Path("trips")
+@Path("flightinfo")
 public class FlightApi {
 Gson gson;
 static FlightFacade f = new FlightFacade();
@@ -52,21 +56,29 @@ static FlightFacade f = new FlightFacade();
     public void putJson(String content) {
     }
     
+//    @GET
+//    @Produces("application/json")
+//    @Path( "{origin}" )
+//    public String getFlights(@PathParam( "origin" ) String origin){
+//        List<Flightinstance> a = f.getTrips(origin);
+//        
+//        JsonObject obj = new JsonObject();
+//        obj.addProperty( "airline",a.get(0).getFlight().getNumberOfSeats());
+//        obj.addProperty( "descr", a.get(0).getFlight().getAirline().getName());
+//            
+//        return gson.toJson(obj);
+//    }
+    
     @GET
     @Produces("application/json")
-    @Path( "{origin}" )
-    public String getFlights(@PathParam( "origin" ) String origin){
-        List<Flightinstance> a = f.getTrips(origin);
+    @Path("{from}/{date}/{persons}")
+    public String getFlights(@PathParam("from") String from, 
+                             @PathParam("date") String date, 
+                             @PathParam("persons") String persons) throws MalformedURLException
+    {
+        String response = f.getDataFromURL(from, date, persons);
         
-        JsonObject obj = new JsonObject();
-        obj.addProperty( "airline",a.get(0).getFlight().getNumberOfSeats());
-        obj.addProperty( "descr", a.get(0).getFlight().getAirline().getName());
-//      obj.addProperty( "price", cf.getCurrency( code ).getAmount() );
-
-        
-        
-        return gson.toJson(obj);
+        return response;
     }
-    
     
 }

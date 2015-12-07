@@ -15,6 +15,11 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 $scope.showlist = false;
                 $scope.alert = false;
+                
+                $scope.paste = function(insertdate){
+                    
+                    $scope.date = insertdate;
+                };
 
                 $scope.searchFlights = function () {
 
@@ -29,7 +34,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
                     //console.log(url);
 
-                    if ($scope.from == null || $scope.date == null || $scope.persons == null)
+                    if ($scope.from == null || $scope.date == null || $scope.persons == null || $scope.from == "" || $scope.date == "" || $scope.persons == "")
                     {
                         $scope.showlist = false;
                         $scope.alert = true;

@@ -76,7 +76,20 @@ static FlightFacade f = new FlightFacade();
                              @PathParam("date") String date, 
                              @PathParam("persons") String persons) throws MalformedURLException
     {
-        String response = f.getDataFromURL(from, date, persons);
+        String response = f.getDataFromURL(from, "", date, persons);
+        
+        return response;
+    }
+    
+    @GET
+    @Produces("application/json")
+    @Path("{from}/{to}/{date}/{persons}")
+    public String getFlightsTo(@PathParam("from") String from, 
+                             @PathParam("to") String to,
+                             @PathParam("date") String date, 
+                             @PathParam("persons") String persons) throws MalformedURLException
+    {
+        String response = f.getDataFromURL(from, to, date, persons);
         
         return response;
     }

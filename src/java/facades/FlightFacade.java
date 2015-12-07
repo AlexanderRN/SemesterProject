@@ -42,10 +42,16 @@ public class FlightFacade {
         return list;
     }
 
-    public String getDataFromURL(String from, String date, String persons) throws MalformedURLException {
+    public String getDataFromURL(String from, String to, String date, String persons) throws MalformedURLException {
         List<URL> URLS = new ArrayList<URL>();
         
-        URL url = new URL("http://angularairline-plaul.rhcloud.com/api/flightinfo/" + from + "/" + date + "/" + persons);
+        URL url = new URL("http://angularairline-plaul.rhcloud.com/api/flightinfo/" + from + "/" + to + "/" + date + "/" + persons);
+        
+        if (to == null || to == "")
+        {
+            url = new URL("http://angularairline-plaul.rhcloud.com/api/flightinfo/" + from + "/" + date + "/" + persons);
+        }
+        
         URLS.add(url);
             String output = "";
             String output2 = "";

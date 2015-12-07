@@ -1,27 +1,54 @@
-<style>h2 {color: darkblue;}</style>
-<p style="margin-top: 10px;color:#105cb6;font-style: italic; font-size: large">This seed shows a "typical" layout for an application that requires authentication and uses
-  <b>ROLES</b> to distinguish between what authenticated users can do.</p>
-<ul>
-  <li><b style="display: inline-block;width:14em;">Home and 'Using the Seed'</b>Can be seen by all</li>
-  <li><b style="display: inline-block;width:14em;">Page for Users</b> Access to data (REST) requires user to be authenticated as a <em>User</em></li>
-  <li><b style="display: inline-block;width:14em;">Page for Admins</b> Access to data (REST) requires user to be authenticated as an <em>Admin</em></li>
-</ul>
+<div class="container">
 
-<div>
-  <h2>Filter Demo</h2>
-  <ul>
-    <li>Using the checkmark filter with True: {{true | checkmark}} </li>
-    <li>Using the checkmark filter with False: {{false | checkmark}} </li>
-  </ul>
-  <p><span style="font-weight: bold">TESTING: </span><em>See testFilters.js</em> in the Unit Test Folder for an example of how to test a filter</p>
+    <form class="form-inline">
+        <div class="form-group">
+            <select class="form-control" ng-model="from">
+                <option value="">Vælg fra lufthavn</option>
+                <option value="CPH">CPH</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" ng-model="to">
+                <option value="">Vælg til lufthavn</option>
+                <option value="">Alle</option>
+                <option value="SXF">SXF</option>
+                <option value="STN">STN</option>
+            </select>
+            <!--<input type="text" maxlength="3" class="form-control" placeholder="SXF" ng-model="to">-->
+        </div>
+        <div class="form-group">
+<!--            <select class="form-control" ng-model="date">
+                <option value="">Vælg dato</option>
+                <option ng-repeat="f in mydata.flights" value="{{f.date}}">{{f.date}}</option>
+            </select>-->
+            <input type="text" class="form-control" placeholder="Dato" ng-model="date">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Antal personer" ng-model="persons">
+        </div>
+
+        <button type="submit" class="btn btn-success" ng-click="searchFlights()">Søg</button>
+
+    </form>
+
+    <hr>
+    
+    <p>Test datoer: 2016-01-07, 2016-01-04</p>
+
+    <div class="list-group" ng-show="showlist" >
+        <a href="" class="list-group-item active">
+            <h4 class="list-group-item-heading">{{inairline}}</h4>
+        </a>
+        <a href="" class="list-group-item" ng-repeat="d in inmydata.flights">
+            <p><b>Fra:</b> {{d.origin}}</p>
+            <p><b>Til:</b> {{d.destination}}</p>
+            <p><b>Dato:</b> {{d.date}}</p>
+            <p><b>Antal pladser tilbage:</b> {{d.numberOfSeats}}</p>
+            <p><b>Rejsetid:</b> {{d.traveltime}} min.</p>
+            <p><b>Total Pris:</b> {{d.totalPrice}}</p>
+        </a>
+    </div>
+    
+    <div class="alert alert-danger" role="alert" ng-show="alert">Fejl! Prøv venligst igen.</div>
+
 </div>
-<div>
-  <h2>Factory + Service Demo</h2>
-  <p>This message is fetched from a factory: <span style="font-weight: bold"> {{ctrl.msgFromFactory}}</span></p>
-  <p>This message is fetched from a Service: <span style="font-weight: bold"> {{ctrl.msgFromService}}</span></p>
-  <p><span style="font-weight: bold">TESTING: </span>See <em>testFactories.js</em> and <em>testServices.js</em> in the Unit Test Folder for examples of how to test Factories and Services</p>
-</div>
-
-
-
-<h3 style="color: darkred;"><em>Important: This seed is NOT meant for Real Life Projects.</em></h3>

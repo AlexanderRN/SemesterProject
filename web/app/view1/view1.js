@@ -20,6 +20,11 @@ angular.module('myApp.view1', ['ngRoute'])
                     
                     $scope.date = insertdate;
                 };
+                
+                $scope.reserve = function(){
+                    
+                    alert("Din reservation er hermed godkendt!");
+                };
 
                 $scope.searchFlights = function () {
 

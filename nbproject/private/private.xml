@@ -5,18 +5,9 @@
         <group name="a"/>
         <group/>
         <group name="Semester 3 - Modul4 - MomondoProject">
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view1/view1.html</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/facades/UserFacade.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/index.html</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/rest/FlightApi.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/conf/persistence.xml</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/app.js</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view2/view2.js</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view2/view2.html</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/facades/CallableFacade.java</file>
+            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/test/CallableExample.java</file>
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/facades/FlightFacade.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/rest/Admin.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view1/view1.js</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/app.css</file>
         </group>
     </open-files>
 </project-private>

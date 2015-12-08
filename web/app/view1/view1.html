@@ -39,18 +39,21 @@
 
     <hr>
 
-    <div class="list-group" ng-show="showlist" >
+    <div class="list-group" ng-show="showlist" ng-repeat="a in airlines" >
         <a href="" class="list-group-item active">
-            <h4 class="list-group-item-heading">{{inairline}}</h4>
+            <h4 class="list-group-item-heading">{{a.airline}}</h4>
         </a>
-        <a href="" class="list-group-item" ng-repeat="d in inmydata.flights">
+        <div class="list-group-item" ng-repeat="d in a.flights">
             <p><b>Fra:</b> {{d.origin}}</p>
             <p><b>Til:</b> {{d.destination}}</p>
-            <p><b>Dato:</b> {{d.date}}</p>
+            <p><b>Dato:</b> {{d.date.slice(0,10)}}</p>
             <p><b>Antal pladser tilbage:</b> {{d.numberOfSeats}}</p>
             <p><b>Rejsetid:</b> {{d.traveltime}} min.</p>
             <p><b>Total Pris:</b> {{d.totalPrice}}</p>
-        </a>
+            
+            <button type="button" style="margin-top: 10px;" class="btn btn-success">Reserver</button>
+            
+        </div>
     </div>
 
     <div class="alert alert-danger" role="alert" ng-show="alert">Fejl! Prøv venligst igen.</div>

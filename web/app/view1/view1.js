@@ -13,7 +13,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 this.msgFromFactory = InfoFactory.getInfo();
                 this.msgFromService = InfoService.getInfo();
 
-                $scope.showlist = false;
+                $scope.showlist = true;
                 $scope.alert = false;
                 
                 $scope.paste = function(insertdate){
@@ -36,31 +36,30 @@ angular.module('myApp.view1', ['ngRoute'])
 
                     if ($scope.from == null || $scope.date == null || $scope.persons == null || $scope.from == "" || $scope.date == "" || $scope.persons == "")
                     {
-                        $scope.showlist = false;
-                        $scope.alert = true;
+                        $scope.showlist = true;
+                        $scope.alert = false;
                     }
                     
                     {
                         $http.get(url)
                                 .success(function (data, status, headers, config) {
-                                    $scope.inmydata = data;
-                                    $scope.inairline = data.airline;
-                                    //console.log($scope.inmydata);
+                                    $scope.airlines = data.airlines;
+                                    console.log($scope.airlines);
 
                                     //$scope.msg = "Du er nu logget ind som USER";
                                     //$scope.ifUser = true;
                                     
-                                    if ( $scope.inmydata.flights.lenght <= 0 )
-                                    {
-                                        $scope.showlist = false;
-                                        $scope.alert = true;
-                                    }
-                                    else
-                                    {
-                                        $scope.showlist = true;
-                                        $scope.alert = false;
-                                    }
-
+//                                    if ( $scope.airlines.airline.lenght <= 0 )
+//                                    {
+//                                        $scope.showlist = false;
+//                                        $scope.alert = true;
+//                                    }
+//                                    else
+//                                    {
+//                                        $scope.showlist = true;
+//                                        $scope.alert = false;
+//                                    }
+                                 $scope.fdate.slice(1,6);
                                 })
                                 .error(function (data, status, headers, config) {
                                     

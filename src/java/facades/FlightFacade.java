@@ -19,6 +19,7 @@ import javax.persistence.Query;
 public class FlightFacade {
 
     private EntityManagerFactory emf;
+    static CallableFacade cf;
 
     public FlightFacade() {
 
@@ -43,50 +44,17 @@ public class FlightFacade {
     }
 
     public String getDataFromURL(String from, String to, String date, String persons) throws MalformedURLException {
-        List<URL> URLS = new ArrayList<URL>();
-        
-        URL url = new URL("http://angularairline-plaul.rhcloud.com/api/flightinfo/" + from + "/" + to + "/" + date + "/" + persons);
-        
-        if (to == null || to == "")
-        {
-            url = new URL("http://angularairline-plaul.rhcloud.com/api/flightinfo/" + from + "/" + date + "/" + persons);
-        }
-        
-        URLS.add(url);
-            String output = "";
-            String output2 = "";
-        try {
-
-            HttpURLConnection conn = (HttpURLConnection) URLS.get(0).openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("Accept", "application/json");
-
-            if (conn.getResponseCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : "
-                        + conn.getResponseCode());
-            }
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    (conn.getInputStream())));
-
-           // System.out.println("Output from Server .... \n");
-            while ((output = br.readLine()) != null) {
-                //System.out.println(output);
-                output2 += output;
-            }
-
-            conn.disconnect();
-
-        } catch (MalformedURLException e) {
-            //System.err.println(e.getMessage());
-           e.printStackTrace();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
-        }
-        return output2;
+        List<String> u = getUrls();
+        CallableFacade g = new CallableFacade(u,"",from, to, date, persons);
+      return "{\"airlines\": [" + g.runThreads() + "]}";
+    
     }
 
+     public List<String> getUrls(){
+        EntityManager em = getEntityManager();
+        String sql = "SELECT u.url FROM Url u";
+        Query query = em.createQuery(sql);
+        return query.getResultList();
+    }
+ 
 }

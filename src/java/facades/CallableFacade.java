@@ -12,131 +12,136 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.FlushModeType;
+import javax.persistence.LockModeType;
+import javax.persistence.Parameter;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author AlexanderNielsen
  */
-public class CallableFacade implements Callable<String>
-{
+public class CallableFacade implements Callable<String> {
 
     private String url;
     private String from;
     private String to;
     private String date;
     private String persons;
-
-    public CallableFacade( String url, String from, String to, String date, String persons )
-    {
+    private List<String> urls;
+    
+    
+    public CallableFacade(List urls, String url, String from, String to, String date, String persons) {
+        this.urls = urls;
         this.url = url;
         this.from = from;
         this.to = to;
         this.date = date;
         this.persons = persons;
+        
     }
+    
+    
+    
 
     @Override
-    public String call() throws Exception
-    {
+    public String call() throws Exception {
         String status = getFromUrl();
-        return url + "\t:\t " + status + "\t:\t" + Thread.currentThread().getName();
+        return status;
     }
 
-    static String[] hostList =
-    {
-        "http://angularairline-plaul.rhcloud.com/api/flightinfo/",
-        "http://angularairline-plaul.rhcloud.com/api/flightinfo/",
-        "http://angularairline-plaul.rhcloud.com/api/flightinfo/",
-        "http://angularairline-plaul.rhcloud.com/api/flightinfo/",
-        "http://angularairline-plaul.rhcloud.com/api/flightinfo/",
-        "http://angularairline-plaul.rhcloud.com/api/flightinfo/",
-        "http://angularairline-plaul.rhcloud.com/api/flightinfo/"
-    };
 
-    public void runThreads()
-    {
-        ExecutorService executor = Executors.newFixedThreadPool( 4 );
+    public String runThreads() {
+    String status = "";
+        ExecutorService executor = Executors.newFixedThreadPool(4);
         List<Future<String>> list = new ArrayList<>();
 
-        for ( int i = 0; i < hostList.length; i++ )
-        {
-            String url = hostList[i];
-            Callable<String> callable = new CallableFacade( url, from, to, date, persons );
-            Future<String> future = executor.submit( callable );
-            list.add( future );
+        for (int i = 0; i < urls.size(); i++) {
+            String url = urls.get(i);
+            Callable<String> callable = new CallableFacade(urls,url, from, to, date, persons);
+            Future<String> future = executor.submit(callable);
+            list.add(future);
         }
-        for ( Future<String> fut : list )
-        {
-            try
-            {
+        int counter = 0;
+        for (Future<String> fut : list) {
+            try {
                 //print the return value of Future, notice the output delay in console
                 // because Future.get() waits for task to get completed
-                System.out.println( fut.get() );
-            }
-            catch (InterruptedException | ExecutionException e)
-            {
+                System.out.println(fut.get());
+                
+                if(counter > 0){
+                    status += "," + fut.get();
+                }
+                else
+                {
+                    status += fut.get();
+                }
+                
+                counter++;
+                
+            } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
         }
-
+        return status;
     }
 
-    public String getFromUrl() throws IOException
-    {
-        URL url1 = new URL( url + from + "/" + to + "/" + date + "/" + persons );
+    public String getFromUrl() throws IOException {
+        URL url1 = new URL(url + from + "/" + to + "/" + date + "/" + persons);
 
-        if ( to == null || to == "" )
-        {
-            url1 = new URL( url + from + "/" + date + "/" + persons );
+        if (to == null || to == "") {
+            url1 = new URL(url + from + "/" + date + "/" + persons);
         }
 
         String output = "";
         String output2 = "";
-        try
-        {
+        try {
 
             HttpURLConnection conn = (HttpURLConnection) url1.openConnection();
-            conn.setRequestMethod( "GET" );
-            conn.setRequestProperty( "Accept", "application/json" );
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/json");
 
-            if ( conn.getResponseCode() != 200 )
-            {
-                throw new RuntimeException( "Failed : HTTP error code : "
-                        + conn.getResponseCode() );
+            if (conn.getResponseCode() != 200) {
+                throw new RuntimeException("Failed : HTTP error code : "
+                        + conn.getResponseCode());
             }
 
-            BufferedReader br = new BufferedReader( new InputStreamReader(
-                    (conn.getInputStream()) ) );
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    (conn.getInputStream())));
 
             // System.out.println("Output from Server .... \n");
-            while ( (output = br.readLine()) != null )
-            {
+            while ((output = br.readLine()) != null) {
                 //System.out.println(output);
                 output2 += output;
             }
 
             conn.disconnect();
 
-        }
-        catch (MalformedURLException e)
-        {
+        } catch (MalformedURLException e) {
             //System.err.println(e.getMessage());
             e.printStackTrace();
 
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
 
             e.printStackTrace();
 
         }
         return output2;
     }
-
+    
+   
 }

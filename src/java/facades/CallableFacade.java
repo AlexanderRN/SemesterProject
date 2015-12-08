@@ -97,6 +97,7 @@ public class CallableFacade implements Callable<String> {
                 e.printStackTrace();
             }
         }
+        executor.shutdown();
         return status;
     }
 

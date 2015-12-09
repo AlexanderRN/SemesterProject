@@ -5,7 +5,9 @@
  */
 package facades;
 
+import com.google.gson.JsonObject;
 import java.io.BufferedReader;
+import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -22,6 +24,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.FlushModeType;
@@ -30,6 +34,7 @@ import javax.persistence.Parameter;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
+import org.json.JSONException;
 
 /**
  *
@@ -52,20 +57,17 @@ public class CallableFacade implements Callable<String> {
         this.to = to;
         this.date = date;
         this.persons = persons;
-        
     }
     
     
-    
-
     @Override
     public String call() throws Exception {
-        String status = getFromUrl();
+        String status = validateJson(getFromUrl());
         return status;
     }
 
 
-    public String runThreads() {
+    public String runThreads() throws JSONException {
     String status = "";
         ExecutorService executor = Executors.newFixedThreadPool(4);
         List<Future<String>> list = new ArrayList<>();
@@ -84,11 +86,11 @@ public class CallableFacade implements Callable<String> {
                 System.out.println(fut.get());
                 
                 if(counter > 0){
-                    status += "," + fut.get();
+                    status += "," + validateJson(fut.get());
                 }
                 else
                 {
-                    status += fut.get();
+                    status += validateJson(fut.get());
                 }
                 
                 counter++;
@@ -127,6 +129,7 @@ public class CallableFacade implements Callable<String> {
             // System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 //System.out.println(output);
+                
                 output2 += output;
             }
 
@@ -144,5 +147,29 @@ public class CallableFacade implements Callable<String> {
         return output2;
     }
     
-   
+   public String validateJson(String json){
+       String ret = ""; 
+       try {
+         
+            JSONObject jo = new JSONObject(json);
+            JSONObject jo2 = jo.getJSONArray("flights").getJSONObject(0);
+            if (jo.has("airline") 
+                    && jo.has("flights") 
+                    && jo2.has("flightID")
+                    && jo2.has("numberOfSeats")
+                    && jo2.has("date")
+                    && jo2.has("totalPrice")
+                    && jo2.has("traveltime")
+                    && jo2.has("origin")
+                    ) {
+                ret = json;
+                //System.out.println(jo.getJSONArray("flights").getJSONObject(0));
+                
+            }else{
+                ret = "";
+            }  } catch (JSONException ex) {
+                //System.out.println("Error" + ex);
+            }
+        return ret;
+   }
 }

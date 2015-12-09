@@ -40,9 +40,6 @@ public class Flightinstance implements Serializable {
     @ManyToOne
     @JoinColumn(name="Flight_ID")
     private Flight flight;
-    
-    @OneToMany(mappedBy = "Flightinstance", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Reservation> reservations = new ArrayList(); 
 
 
     public Flightinstance() {
@@ -122,17 +119,10 @@ public class Flightinstance implements Serializable {
         this.flight = flight;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
 
     @Override
     public String toString() {
-        return "Flightinstance{" + "id=" + id + ", flightDate=" + flightDate + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", travelTime=" + travelTime + ", origin=" + origin + ", destination=" + destination + ", flight=" + flight + ", reservations=" + reservations + '}';
+        return "Flightinstance{" + "id=" + id + ", flightDate=" + flightDate + ", numberOfSeats=" + numberOfSeats + ", totalPrice=" + totalPrice + ", travelTime=" + travelTime + ", origin=" + origin + ", destination=" + destination + ", flight=" + flight + '}';
     }
     
     

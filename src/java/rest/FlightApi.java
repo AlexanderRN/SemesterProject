@@ -20,6 +20,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import org.json.JSONException;
 
 
 @Path("flightinfo")
@@ -74,7 +75,7 @@ static FlightFacade f = new FlightFacade();
     @Path("{from}/{date}/{persons}")
     public String getFlights(@PathParam("from") String from, 
                              @PathParam("date") String date, 
-                             @PathParam("persons") String persons) throws MalformedURLException
+                             @PathParam("persons") String persons) throws MalformedURLException, JSONException
     {
         String response = f.getDataFromURL(from, "", date, persons);
         
@@ -87,7 +88,7 @@ static FlightFacade f = new FlightFacade();
     public String getFlightsTo(@PathParam("from") String from, 
                              @PathParam("to") String to,
                              @PathParam("date") String date, 
-                             @PathParam("persons") String persons) throws MalformedURLException
+                             @PathParam("persons") String persons) throws MalformedURLException, JSONException
     {
         String response = f.getDataFromURL(from, to, date, persons);
         

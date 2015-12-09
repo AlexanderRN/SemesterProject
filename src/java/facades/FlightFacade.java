@@ -15,6 +15,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import org.json.JSONException;
 
 public class FlightFacade {
 
@@ -43,11 +44,10 @@ public class FlightFacade {
         return list;
     }
 
-    public String getDataFromURL(String from, String to, String date, String persons) throws MalformedURLException {
+    public String getDataFromURL(String from, String to, String date, String persons) throws MalformedURLException, JSONException {
         List<String> u = getUrls();
         CallableFacade g = new CallableFacade(u,"",from, to, date, persons);
       return "{\"airlines\": [" + g.runThreads() + "]}";
-    
     }
 
      public List<String> getUrls(){

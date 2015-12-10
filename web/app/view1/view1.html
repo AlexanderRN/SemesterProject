@@ -51,7 +51,7 @@
             <p><b>Rejsetid:</b> {{d.traveltime}} min.</p>
             <p><b>Total Pris:</b> {{d.totalPrice}}</p>
             
-            <button type="button" style="margin-top: 10px;" class="btn btn-success" ng-click="reserve()">Reserver</button>
+            <button type="button" style="margin-top: 10px;" class="btn btn-success" ng-click="reserve(a.airline,d.origin,d.destination,d.date,d.numberOfSeats,d.traveltime,d.totalPrice)">Reserver</button>
             
         </div>
     </div>

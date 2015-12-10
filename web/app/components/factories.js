@@ -3,12 +3,27 @@
 /* Place your global Factory-service in this file */
 
 angular.module('myApp.factories', []).
-  factory('InfoFactory', function () {
-    var info = "Hello World from a Factory";
-    var getInfo = function getInfo(){
-      return info;
-    };
-    return {
-      getInfo: getInfo
-    };
-  });
+        factory('InfoFactory', function () {
+            var info = "Hello World from a Factory";
+            var getInfo = function getInfo() {
+                return info;
+            };
+            return {
+                getInfo: getInfo
+            };
+        })
+
+        .factory('reservationFactory', function () {
+            var info = [];
+            var rf = {};
+            rf.getInfo = function () {
+                return info;
+            };
+            rf.setInfo = function (infoarray) {
+                info = infoarray;
+                
+               // console.log(info);
+            };
+            return rf;
+            
+        });

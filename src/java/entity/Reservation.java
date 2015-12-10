@@ -24,7 +24,6 @@ import javax.persistence.Table;
  * @author AlexanderNielsen
  */
 @Entity
-@Table(name="reservation")
 public class Reservation implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,8 +32,8 @@ public class Reservation implements Serializable {
     private Double price;
     private String res_date;
     private String iatacode;
-    private String from;
-    private String to;
+    private String origin;
+    private String destination;
     
     @OneToMany(mappedBy = "reservation", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Passenger> passengers = new ArrayList();
@@ -72,20 +71,20 @@ public class Reservation implements Serializable {
         this.res_date = res_date;
     }
 
-    public String getFrom() {
-        return from;
+    public String getOrigin() {
+        return origin;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
-    public String getTo() {
-        return to;
+    public String getDestinaiton() {
+        return destination;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public List<Passenger> getPassengers() {

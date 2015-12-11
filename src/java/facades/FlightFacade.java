@@ -1,6 +1,8 @@
 package facades;
 
 import entity.Flightinstance;
+import entity.Passenger;
+import entity.Reservation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -56,5 +58,18 @@ public class FlightFacade {
         Query query = em.createQuery(sql);
         return query.getResultList();
     }
+     
+     public boolean setReservation(String origin, String destination, Double price, String res_date, String traveltime, List<Passenger> passengers)
+     {         
+         EntityManager em = getEntityManager();
+         
+         em.getTransaction().begin();
+         Reservation r = new Reservation(origin, destination, price, res_date, traveltime, passengers);
+         
+         em.persist( r );
+         em.getTransaction().commit();
+
+         return true;
+     }
  
 }

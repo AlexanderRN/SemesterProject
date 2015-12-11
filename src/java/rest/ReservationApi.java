@@ -5,6 +5,14 @@
  */
 package rest;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import entity.Passenger;
+import facades.FlightFacade;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -13,6 +21,9 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -21,6 +32,8 @@ import javax.ws.rs.PUT;
  */
 @Path("reservation")
 public class ReservationApi {
+    
+    Gson gson;
 
     @Context
     private UriInfo context;
@@ -29,6 +42,7 @@ public class ReservationApi {
      * Creates a new instance of ReservationApi
      */
     public ReservationApi() {
+        gson = new GsonBuilder().setPrettyPrinting().setFieldNamingPolicy( FieldNamingPolicy.IDENTITY ).create();
     }
 
     /**
@@ -44,22 +58,41 @@ public class ReservationApi {
 
     /**
      * PUT method for updating or creating an instance of ReservationApi
+     * @param iatacode
+     * @param from
+     * @param to
+     * @param res_date
+     * @param traveltime
+     * @param price
      * @param content representation for the resource
+     * @param passangers
      * @return an HTTP response with content of the updated or created resource.
      */
     @PUT
     @Consumes("application/json")
-    @Path("{iatacode}, {from}, {to}, {res_date}, {price}, {passangers}")
-    public String putJson(@PathParam("iatacode") String iatacode,
-                          @PathParam("from") String from,
+    @Path("{from}, {to}, {res_date}, {traveltime}, {price}, {passengers}")
+    public String putJson(@PathParam("from") String from,
                           @PathParam("to") String to,
                           @PathParam("res_date") String res_date,
+                          @PathParam("traveltime") String traveltime,
                           @PathParam("price") String price,
-                          @PathParam("passangers") String passangers){
+                          @PathParam("passengers") String passengers) throws JSONException
+    {
+        Double pPrice = Double.parseDouble( price );
         
-        String sql = "INSERT INTO c ";
+        Passenger[] pasArray = gson.fromJson( passengers, Passenger[].class);
+
+        List<Passenger> pasList = new ArrayList();
+            
+        for (int i = 0; i < pasArray.length; i++)
+        {
+           pasList.add( pasArray[i] );
+        }
+            
+        FlightFacade f = new FlightFacade();
+        f.setReservation( from, to, pPrice, res_date, traveltime, pasList );
         
-        return null;
+        return "OK";
     }
     
 }

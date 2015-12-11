@@ -29,11 +29,12 @@ public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Double price;
-    private String res_date;
-    private String iatacode;
     private String origin;
     private String destination;
+    private Double price;
+    private String res_date;
+    private String traveltime;
+    
     
     @OneToMany(mappedBy = "reservation", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Passenger> passengers = new ArrayList();
@@ -42,9 +43,13 @@ public class Reservation implements Serializable {
     public Reservation() {
     }
 
-    public Reservation(Long id, Double price) {
-        this.id = id;
+    public Reservation(String origin, String destination, Double price, String res_date, String traveltime, List<Passenger> passengers) {
+        this.origin = origin;
+        this.destination = destination;
         this.price = price;
+        this.res_date = res_date;
+        this.traveltime = traveltime;
+        this.passengers = passengers;
     }
 
     public Double getPrice() {
@@ -95,13 +100,17 @@ public class Reservation implements Serializable {
         this.passengers = passengers;
     }
 
-    public String getIatacode() {
-        return iatacode;
+    public String getTraveltime()
+    {
+        return traveltime;
     }
 
-    public void setIatacode(String iatacode) {
-        this.iatacode = iatacode;
+    public void setTraveltime( String traveltime )
+    {
+        this.traveltime = traveltime;
     }
+
+    
     
     
 }

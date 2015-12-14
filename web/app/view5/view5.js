@@ -40,7 +40,11 @@ angular.module('myApp.view5', ['ngRoute'])
                     
                     //console.log($scope.pasList);
                     
-                    $scope.postReservation();
+                    //$scope.postReservation();
+                    
+                    var name = $scope.pasList[0].firstname + " " + $scope.pasList[0].lastname;
+                    
+                    alert("Hej " + name + " din reservation er hermed gennemført!");
                     
                 };
 

@@ -13,6 +13,85 @@ angular.module('myApp.view1', ['ngRoute'])
                 this.msgFromFactory = InfoFactory.getInfo();
                 this.msgFromService = InfoService.getInfo();
 
+
+                /************************************
+                 * Date picker START
+                 ************************************/
+                $scope.today = function () {
+                    $scope.date = new Date();
+                };
+                $scope.today();
+
+                $scope.clear = function () {
+                    $scope.date = null;
+                };
+
+                // Disable weekend selection
+                $scope.disabled = function (date, mode) {
+                    return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+                };
+
+                $scope.toggleMin = function () {
+                    $scope.minDate = $scope.minDate ? null : new Date();
+                };
+                $scope.toggleMin();
+                $scope.maxDate = new Date(2020, 5, 22);
+
+                $scope.open = function ($event) {
+                    $scope.status.opened = true;
+                };
+
+                $scope.setDate = function (year, month, day) {
+                    $scope.date = new Date(year, month, day);
+                };
+
+                $scope.dateOptions = {
+                    formatYear: 'yyyy',
+                    startingDay: 1
+                };
+
+                $scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+                $scope.format = $scope.formats[0];
+
+                $scope.status = {
+                    opened: false
+                };
+
+                var tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                var afterTomorrow = new Date();
+                afterTomorrow.setDate(tomorrow.getDate() + 2);
+                $scope.events =
+                        [
+                            {
+                                date: tomorrow,
+                                status: 'full'
+                            },
+                            {
+                                date: afterTomorrow,
+                                status: 'partially'
+                            }
+                        ];
+
+                $scope.getDayClass = function (date, mode) {
+                    if (mode === 'day') {
+                        var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                        for (var i = 0; i < $scope.events.length; i++) {
+                            var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                            if (dayToCheck === currentDay) {
+                                return $scope.events[i].status;
+                            }
+                        }
+                    }
+
+                    return '';
+                };
+                /************************************
+                 * Date picker END
+                 ************************************/
+
                 $scope.showlist = true;
                 $scope.alert = false;
 
@@ -32,32 +111,56 @@ angular.module('myApp.view1', ['ngRoute'])
                 };
 
                 $scope.searchFlights = function () {
+                    
+                    var fulldate = $scope.date.toISOString();
+                    var dateF = fulldate.slice(0, 10);
 
-                    if ($scope.to !== null)
-                    {
-                        var url = 'api/flightinfo/' + $scope.from + '/' + $scope.to + '/' + $scope.date + 'T00:00:00.000Z/' + $scope.persons;
-                    }
-                    else
-                    {
-                        var url = 'api/flightinfo/' + $scope.from + '/' + $scope.date + '00:00:00.000Z/' + $scope.persons;
-                    }
 
-                    //console.log(url);
+//                    if ($scope.from == null || $scope.from == "")
+//                    {
+//                        alert("Venligst vælg fra lufthavn!")
+//                    }
+//                    if ($scope.to == null)
+//                    {
+//                        alert("Venligst vælg til lufthavn!")
+//                    }
+//                    if (dateF == null || dateF == "")
+//                    {
+//                        alert("Venligst vælg dato!")
+//                    }
+//                    if ($scope.persons == null || $scope.persons == "")
+//                    {
+//                        alert("Venligst vælg antal personer!")
+//                    }
 
-                    if ($scope.from == null || $scope.date == null || $scope.persons == null || $scope.from == "" || $scope.date == "" || $scope.persons == "")
-                    {
-                        $scope.showlist = true;
-                        $scope.alert = false;
-                    }
 
-                    {
-                        $http.get(url)
-                                .success(function (data, status, headers, config) {
-                                    $scope.airlines = data.airlines;
-                                    console.log($scope.airlines);
+                    if (($scope.from !== null || $scope.from !== "") && (dateF !== null || dateF !== "") && ($scope.persons !== null || $scope.persons !== "") && ($scope.to !== null || $scope.to !== "")) {
 
-                                    //$scope.msg = "Du er nu logget ind som USER";
-                                    //$scope.ifUser = true;
+                        if ($scope.to !== null || $scope.to !== "")
+                        {
+                            var url = 'api/flightinfo/' + $scope.from + '/' + $scope.to + '/' + dateF + 'T00:00:00.000Z/' + $scope.persons;
+                        }
+                        else
+                        {
+                            var url = 'api/flightinfo/' + $scope.from + '/' + dateF + '00:00:00.000Z/' + $scope.persons;
+                        }
+
+                        //console.log(url);
+
+                        if ($scope.from == null || dateF == null || $scope.persons == null || $scope.from == "" || dateF == "" || $scope.persons == "")
+                        {
+                            $scope.showlist = true;
+                            $scope.alert = false;
+                        }
+
+                        {
+                            $http.get(url)
+                                    .success(function (data, status, headers, config) {
+                                        $scope.airlines = data.airlines;
+                                        console.log($scope.airlines);
+
+                                        //$scope.msg = "Du er nu logget ind som USER";
+                                        //$scope.ifUser = true;
 
 //                                    if ( $scope.airlines.airline.lenght <= 0 )
 //                                    {
@@ -69,13 +172,14 @@ angular.module('myApp.view1', ['ngRoute'])
 //                                        $scope.showlist = true;
 //                                        $scope.alert = false;
 //                                    }
-                                    $scope.fdate.slice(1, 6);
-                                })
-                                .error(function (data, status, headers, config) {
 
-                                });
+                                    })
+                                    .error(function (data, status, headers, config) {
+
+                                    });
 
 
+                        }
                     }
 
                 };

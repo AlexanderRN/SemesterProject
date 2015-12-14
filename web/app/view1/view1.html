@@ -16,12 +16,11 @@
             </select>
             <!--<input type="text" maxlength="3" class="form-control" placeholder="SXF" ng-model="to">-->
         </div>
-        <div class="form-group">
-            <!--            <select class="form-control" ng-model="date">
-                            <option value="">Vælg dato</option>
-                            <option ng-repeat="f in mydata.flights" value="{{f.date}}">{{f.date}}</option>
-                        </select>-->
-            <input type="text" class="form-control" placeholder="Dato" ng-model="date">
+        <div class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
         </div>
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Antal personer" ng-model="persons">
@@ -46,13 +45,13 @@
         <div class="list-group-item" ng-repeat="d in a.flights">
             <p><b>Fra:</b> {{d.origin}}</p>
             <p><b>Til:</b> {{d.destination}}</p>
-            <p><b>Dato:</b> {{d.date.slice(0,10)}}</p>
+            <p><b>Dato:</b> {{d.date.slice(0, 10)}}</p>
             <p><b>Antal pladser tilbage:</b> {{d.numberOfSeats}}</p>
             <p><b>Rejsetid:</b> {{d.traveltime}} min.</p>
             <p><b>Total Pris:</b> {{d.totalPrice}}</p>
-            
-            <button type="button" style="margin-top: 10px;" class="btn btn-success" ng-click="reserve(a.airline,d.origin,d.destination,d.date,d.numberOfSeats,d.traveltime,d.totalPrice)">Reserver</button>
-            
+
+            <a href="#/view5" type="button" style="margin-top: 10px;" class="btn btn-success" ng-click="reserve(a.airline, d.origin, d.destination, d.date, d.numberOfSeats, d.traveltime, d.totalPrice)">Reserver</a>
+
         </div>
     </div>
 

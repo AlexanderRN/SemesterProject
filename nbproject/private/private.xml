@@ -3,13 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="a"/>
-        <group/>
         <group name="Semester 3 - Modul4 - MomondoProject">
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view1/view1.html</file>
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view5/view5.html</file>
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/index.html</file>
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view1/view1.js</file>
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view5/view5.js</file>
+        </group>
+        <group>
+            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Role.java</file>
+            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/security/JWTAuthenticationFilter.java</file>
+            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/facades/UserFacade.java</file>
+            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/User.java</file>
+            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/deploy/DeploymentConfiguration.java</file>
         </group>
     </open-files>
 </project-private>

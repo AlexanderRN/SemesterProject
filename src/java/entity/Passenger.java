@@ -29,5 +29,67 @@ public class Passenger implements Serializable {
     private String firstName;
     private String lastName;
     private boolean reserver;
+
+    public Passenger()
+    {
+    }
+
+    public Passenger( String firstName, String lastName, boolean reserver )
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.reserver = reserver;
+    }
+    
+    public Reservation getReservation()
+    {
+        return reservation;
+    }
+
+    public void setReservation( Reservation reservation )
+    {
+        this.reservation = reservation;
+    }
+
+    public String getFirstName()
+    {
+        return firstName;
+    }
+
+    public void setFirstName( String firstName )
+    {
+        this.firstName = firstName;
+    }
+
+    public String getLastName()
+    {
+        return lastName;
+    }
+
+    public void setLastName( String lastName )
+    {
+        this.lastName = lastName;
+    }
+
+    public boolean isReserver()
+    {
+        return reserver;
+    }
+
+    public void setReserver( boolean reserver )
+    {
+        this.reserver = reserver;
+    }
+    
+    
+
+    @Override
+    public String toString()
+    {
+        return "Passenger{" + "reservation=" + reservation + ", firstName=" + firstName + ", lastName=" + lastName + ", reserver=" + reserver + '}';
+    }
+   
     
 }
+
+

@@ -184,15 +184,15 @@ angular.module('myApp.view1', ['ngRoute'])
 
                 };
                 $scope.reservation = function () {
-                    var URL = "api/flightinfo";
-                    var parameter = JSON.stringify({});
-                    $http.post(url)
-                            .success(function (data, status, headers, config) {
-
-                            })
-                            .error(function (data, status, headers, config) {
-
-                            });
+//                    var url = "api/flightinfo";
+//                    var parameter = JSON.stringify({});
+//                    $http.post(url)
+//                            .success(function (data, status, headers, config) {
+//
+//                            })
+//                            .error(function (data, status, headers, config) {
+//
+//                            });
 
                 };
             }]);

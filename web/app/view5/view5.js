@@ -33,57 +33,111 @@ angular.module('myApp.view5', ['ngRoute'])
                     $scope.counter.push(type);
 
                 }
-                
-                $scope.test = function(){
-                    
+
+                $scope.test = function () {
+
                     //var firstnames = $scope.resform;
-                    
+
                     //console.log($scope.pasList);
-                    
-                    //$scope.postReservation();
-                    
-                    var name = $scope.pasList[0].firstname + " " + $scope.pasList[0].lastname;
-                    
-                    alert("Hej " + name + " din reservation er hermed gennemført!");
-                    
+
+                    $scope.postReservation();
+
+                    //var name = $scope.pasList[0].firstname + " " + $scope.pasList[0].lastname;
+
+                    //alert("Hej " + name + " din reservation er hermed gennemført!");
+
                 };
 
                 $scope.postReservation = function () {
-                    
+
                     // FLIGTH INFO
-                    var reservationInfoAsArray = reservationFactory.getInfo();
-                    var airline = reservationInfoAsArray[0];
-                    var from = reservationInfoAsArray[1];
-                    var to = reservationInfoAsArray[2];
-                    var date = reservationInfoAsArray[3];
-                    var passengerCount = reservationInfoAsArray[4];
-                    var traveltime = reservationInfoAsArray[5];
-                    var totalprice = reservationInfoAsArray[6];
-                    
+//                    var reservationInfoAsArray = reservationFactory.getInfo();
+//                    var airline = reservationInfoAsArray[0];
+//                    var from = reservationInfoAsArray[1];
+//                    var to = reservationInfoAsArray[2];
+//                    var date = reservationInfoAsArray[3];
+//                    var passengerCount = reservationInfoAsArray[4];
+//                    var traveltime = reservationInfoAsArray[5];
+//                    var totalprice = reservationInfoAsArray[6];
+
                     // PASSENGER INFO
-                    var passengersInfo = "";
+//                    var passengersInfo = "";
+//
+//                    for (var i = 0; i < passengerCount; i++)
+//                    {
+//                        passengersInfo += "{ firstname:" + $scope.pasList[i].firstname + ", lastname:" + $scope.pasList[i].lastname + "}";
+//                    }
+
+//                    var parameter = JSON.stringify(passengersInfo);
+
+                    // PREPARE POST URL
+//                    var url = "api/reservation/" + from + "/" + to + "/" + date + "/" + traveltime + "/" + totalprice + "/" + parameter;
+
+                    // POST TO API
+//                    $http.post(url)
+//                        .success(function (data, status, headers, config) 
+//                        {
+//                            $scope.msg = data;
+//                        })
+//                        .error(function (data, status, headers, config)
+//                        {
+//
+//                        });
+
+                    var reservationInfoAsArray = reservationFactory.getInfo();
+                    var airline = reservationInfoAsArray[0].toString();
+                    var from = reservationInfoAsArray[1].toString();
+                    var to = reservationInfoAsArray[2].toString();
+                    var date = reservationInfoAsArray[3].toString();
+                    var passengerCount = reservationInfoAsArray[4].toString();
+                    var traveltime = reservationInfoAsArray[5].toString();
+                    var totalprice = reservationInfoAsArray[6].toString();
                     
+                    var url = 'api/reservation/';
+                    var reservationInfo = reservationFactory.getInfo();
+                    var passengersInfo = [];
+
                     for (var i = 0; i < passengerCount; i++)
                     {
-                        passengersInfo += "{ firstname:" + $scope.pasList[i].firstname + ", lastname:" + $scope.pasList[i].lastname + "}";
+                        passengersInfo.push({ "firstname": $scope.pasList[i].firstname, "lastname": $scope.pasList[i].lastname });
                     }
-                    
-                    var parameter = JSON.stringify(passengersInfo);
-                    
-                    // PREPARE POST URL
-                    var url = "api/reservation/" + from + "/" + to + "/" + date + "/" + traveltime + "/" + totalprice + "/" + parameter;
-                    
-                    // POST TO API
-                    $http.post(url)
-                        .success(function (data, status, headers, config) 
-                        {
-                            $scope.msg = data;
-                        })
-                        .error(function (data, status, headers, config)
-                        {
 
+                    //var parameter = JSON.stringify(passengersInfo + reservationInfo);
+
+                    //console.log(reservationInfo);
+                    //console.log(parameter);
+
+                    var resJson =
+                            {
+                                "reservation": {
+                                    "airline": airline,
+                                    "origin": from,
+                                    "destination": to,
+                                    "date": date,
+                                    "numberOfSeats": passengerCount,
+                                    "traveltime": traveltime,
+                                    "totalprice": totalprice,
+                                    "username": "null"
+                                }
+                            };
+                    var pasJson = 
+                            {
+                                "passengers": passengersInfo       
+                            };
+
+                    $http({
+                        url: 'api/reservation/insert/' + JSON.stringify(resJson) + "/" + JSON.stringify(pasJson),
+                        method: 'PUT',
+                        headers: {'Content-Type': 'application/json'},
+                        data: JSON.stringify(resJson)
+                    })
+                    .success(function (data, status, headers, config) 
+                        {
+                            console.log(pasJson);
+                            console.log(data);
                         });
-                    }; // RESERVATION FUNCTION END
-            
+
+                }; // RESERVATION FUNCTION END
+
             }]); //Controller END
         

@@ -59,12 +59,12 @@ public class FlightFacade {
         return query.getResultList();
     }
      
-     public boolean setReservation(String origin, String destination, Double price, String res_date, String traveltime, List<Passenger> passengers)
+     public boolean setReservation(String airline, String origin,int numberOfSeats, String destination, Double price, String res_date, String traveltime, List<Passenger> passengers, String username)
      {         
          EntityManager em = getEntityManager();
          
          em.getTransaction().begin();
-         Reservation r = new Reservation(origin, destination, price, res_date, traveltime, passengers);
+         Reservation r = new Reservation(airline, origin, numberOfSeats, destination, price, res_date, traveltime, passengers, username);
          
          em.persist( r );
          em.getTransaction().commit();

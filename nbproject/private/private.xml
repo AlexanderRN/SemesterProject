@@ -10,19 +10,6 @@
             <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/User.java</file>
             <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/deploy/DeploymentConfiguration.java</file>
         </group>
-        <group name="Semester 3 - Modul4 - MomondoProject">
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/entity/Passenger.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/entity/Reservation.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/facades/UserFacade.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/rest/FlightApi.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/index.html</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view5/view5.html</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/app.js</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/rest/ReservationApi.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/facades/FlightFacade.java</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view1/view1.js</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view5/view5.js</file>
-            <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/entity/User.java</file>
-        </group>
+        <group name="Semester 3 - Modul4 - MomondoProject"/>
     </open-files>
 </project-private>

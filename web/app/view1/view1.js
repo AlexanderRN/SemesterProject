@@ -13,6 +13,8 @@ angular.module('myApp.view1', ['ngRoute'])
                 this.msgFromFactory = InfoFactory.getInfo();
                 this.msgFromService = InfoService.getInfo();
 
+                $scope.loader = false; //loader
+                $scope.showlist = false; // response
 
                 /************************************
                  * Date picker START
@@ -92,9 +94,6 @@ angular.module('myApp.view1', ['ngRoute'])
                  * Date picker END
                  ************************************/
 
-                $scope.showlist = true;
-                $scope.alert = false;
-
                 $scope.paste = function (insertdate) {
 
                     $scope.date = insertdate;
@@ -111,6 +110,9 @@ angular.module('myApp.view1', ['ngRoute'])
                 };
 
                 $scope.searchFlights = function () {
+                    
+                    $scope.loader = true; //loader
+                    $scope.showlist = false; // response
                     
                     var fulldate = $scope.date.toISOString();
                     var dateF = fulldate.slice(0, 10);
@@ -147,17 +149,35 @@ angular.module('myApp.view1', ['ngRoute'])
 
                         //console.log(url);
 
-                        if ($scope.from == null || dateF == null || $scope.persons == null || $scope.from == "" || dateF == "" || $scope.persons == "")
-                        {
-                            $scope.showlist = true;
-                            $scope.alert = false;
-                        }
+//                        if ($scope.from == null || dateF == null || $scope.persons == null || $scope.from == "" || dateF == "" || $scope.persons == "")
+//                        {
+//                            $scope.showlist = true;
+//                            $scope.alert = false;
+//                        }
 
                         {
                             $http.get(url)
                                     .success(function (data, status, headers, config) {
                                         $scope.airlines = data.airlines;
                                         console.log($scope.airlines);
+                                       
+                                        
+                                        $scope.resultCount = 0;
+                                        
+                                        for(var i = 0; i < $scope.airlines.length; i++)
+                                        {
+                                            for(var j = 0; j < $scope.airlines[i].flights.length; j++)
+                                            {
+                                                $scope.resultCount++;
+                                            }
+                                        }
+                                        
+                                        
+                                        if($scope.airline !== null)
+                                        {
+                                            $scope.loader = false; //loader
+                                            $scope.showlist = true; // response
+                                        }
 
                                         //$scope.msg = "Du er nu logget ind som USER";
                                         //$scope.ifUser = true;

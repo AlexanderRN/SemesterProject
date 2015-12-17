@@ -1,0 +1,62 @@
+<div class="container">
+
+    <form class="form-inline">
+        <div class="form-group">
+            <select class="form-control" ng-model="from">
+                <option value="">Vælg fra lufthavn</option>
+                <option value="CPH">CPH</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" ng-model="to">
+                <option value="">Vælg til lufthavn</option>
+                <option value="">Alle</option>
+                <option value="SXF">SXF</option>
+                <option value="STN">STN</option>
+            </select>
+            <!--<input type="text" maxlength="3" class="form-control" placeholder="SXF" ng-model="to">-->
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Antal personer" ng-model="persons">
+        </div>
+
+        <button type="submit" class="btn btn-success" ng-click="searchFlights()">Søg</button>
+
+    </form>
+
+    <p style="margin-top:10px;"><b>Test datoer</b></p>
+    <ul>
+        <li><a href="" ng-click="paste('2016-01-07')">2016-01-07</a></li>
+        <li><a href="" ng-click="paste('2016-01-04')">2016-01-04</a></li>
+    </ul>
+
+    <hr>
+    
+    <img src="app/view1/image/hourglass.svg" class="center-block" style="margin-top: 20px;" width="80" height="80" ng-show="loader">
+
+    <div class="list-group" ng-show="showlist" ng-repeat="a in airlines" >
+        <a href="" class="list-group-item active">
+            <h4 class="list-group-item-heading">{{a.airline}}</h4>
+        </a>
+        <div class="list-group-item" ng-repeat="d in a.flights">
+            <p><b>Fra:</b> {{d.origin}}</p>
+            <p><b>Til:</b> {{d.destination}}</p>
+            <p><b>Dato:</b> {{d.date.slice(0, 10)}}</p>
+            <p><b>Antal pladser tilbage:</b> {{d.numberOfSeats}}</p>
+            <p><b>Rejsetid:</b> {{d.traveltime}} min.</p>
+            <p><b>Total Pris:</b> {{d.totalPrice}}</p>
+
+            <a href="#/view5" type="button" style="margin-top: 10px;" class="btn btn-success" ng-click="reserve(a.airline, d.origin, d.destination, d.date, d.numberOfSeats, d.traveltime, d.totalPrice)">Reserver</a>
+
+        </div>
+    </div>
+
+    <div class="alert alert-danger" role="alert" ng-show="alert">Fejl! Prøv venligst igen.</div>
+
+</div>

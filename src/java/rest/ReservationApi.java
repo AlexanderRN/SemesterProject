@@ -124,7 +124,7 @@ public class ReservationApi
         String numberOfSeats = obj.getJSONObject( "reservation" ).getString( "numberOfSeats" );
         String traveltime = obj.getJSONObject( "reservation" ).getString( "traveltime" );
         String totalprice = obj.getJSONObject( "reservation" ).getString( "totalprice" );
-        String username = obj.getJSONObject( "reservation" ).getString( "userid" );
+        String username = obj.getJSONObject( "reservation" ).getString( "username" );
         
         // PASSENGERS
         JSONArray passengers = pasObj.getJSONArray( "passengers" );
@@ -138,7 +138,7 @@ public class ReservationApi
             String lastname = passengers.getJSONObject( i ).getString( "lastname" );
             boolean reserver = true;
             
-            if( i > 1 )
+            if( i > 0 )
             {
                 reserver = false;
             }
@@ -150,6 +150,8 @@ public class ReservationApi
         FlightFacade ff = new FlightFacade();
         boolean ifInsert = ff.setReservation( airline, origin, Integer.parseInt(numberOfSeats), destination, Double.parseDouble( totalprice ), date, traveltime, pasList, username );
 
+        System.out.println( pasList.get( 0 ).getFirstName() );
+        
         return ifInsert;
     }
 

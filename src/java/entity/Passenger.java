@@ -21,10 +21,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name="passenger")
 public class Passenger implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
     @Id
-    @ManyToOne
-    @JoinColumn(name="reservation_ID")
-    private Reservation reservation;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     private String firstName;
     private String lastName;
@@ -40,17 +41,17 @@ public class Passenger implements Serializable {
         this.lastName = lastName;
         this.reserver = reserver;
     }
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public void setId( Long id )
+    {
+        this.id = id;
+    }
     
-    public Reservation getReservation()
-    {
-        return reservation;
-    }
-
-    public void setReservation( Reservation reservation )
-    {
-        this.reservation = reservation;
-    }
-
     public String getFirstName()
     {
         return firstName;
@@ -86,7 +87,7 @@ public class Passenger implements Serializable {
     @Override
     public String toString()
     {
-        return "Passenger{" + "reservation=" + reservation + ", firstName=" + firstName + ", lastName=" + lastName + ", reserver=" + reserver + '}';
+        return "Passenger{" + "firstName=" + firstName + ", lastName=" + lastName + ", reserver=" + reserver + '}';
     }
    
     

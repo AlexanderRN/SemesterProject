@@ -1,0 +1,34 @@
+<h1>Reservation</h1>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <form name="resform" ng-model="resform">
+                <div class="well" ng-repeat="c in counter">
+                    <label>{{c}}</label>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="firstname" ng-model="pasList[$index].firstname" placeholder="Firstname">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="lastname" ng-model="pasList[$index].lastname" placeholder="Lastname">
+                    </div>
+                </div>
+                <button class="btn btn-success" style="margin-bottom: 20px;" type="button" ng-click="test()">Reserver</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div class="well">
+                <h3>Reservation</h3>
+                <p><b>Airline:</b> {{reservation[0]}}</p>
+                <p><b>Fra:</b> {{reservation[1]}}</p>
+                <p><b>Til:</b> {{reservation[2]}}</p>
+                <p><b>Dato:</b> {{reservation[3].slice(0,10)}}</p>
+                <p><b>Antal Passagere:</b> {{reservation[4]}}</p>
+                <p><b>Rejsetid:</b> {{reservation[5]}} min.</p>
+                <p><b>TOTAL:</b> {{reservation[6]}} DKK</p>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- /container -->

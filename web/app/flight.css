@@ -1,0 +1,13 @@
+body, html
+{
+	background: #190723;
+}
+
+.well-2
+{
+	background: #F4F7F8;
+	border: none;
+        border-radius: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+}

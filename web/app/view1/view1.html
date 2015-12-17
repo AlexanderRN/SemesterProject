@@ -1,60 +1,113 @@
-<div class="container">
 
-    <form class="form-inline">
-        <div class="form-group">
-            <select class="form-control" ng-model="from">
-                <option value="">Vælg fra lufthavn</option>
-                <option value="CPH">CPH</option>
-            </select>
+<div class="book-div">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control input-lg" id="from" name="from" placeholder="Origin" ng-model="from">
+                    <i class="fa fa-plane form-control-feedback input-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group has-feedback">
+                    <input type="text" class="form-control input-lg" id="to" name="to" placeholder="Destination" ng-model="to">
+                    <i class="fa fa-plane form-control-feedback input-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group has-feedback">
+                    <input ng-click="open($event)" type="text" style="cursor: pointer;" class="form-control input-lg" uib-datepicker-popup="{{format}}" ng-model="date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close">
+                    <i class="fa fa-calendar form-control-feedback input-icon"></i>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <select class="form-control ca-select" ng-model="persons">
+                        <option value="">Passenger..</option>
+                        <option value="1">1 person</option>
+                        <option value="2">2 person</option>
+                        <option value="3">3 person</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <a ng-click="searchFlights()" type="button">
+                    <div class="book-div2"><i class="fa fa-search"></i> Search</div>
+                </a>
+            </div>
         </div>
-        <div class="form-group">
-            <select class="form-control" ng-model="to">
-                <option value="">Vælg til lufthavn</option>
-                <option value="">Alle</option>
-                <option value="SXF">SXF</option>
-                <option value="STN">STN</option>
-            </select>
-            <!--<input type="text" maxlength="3" class="form-control" placeholder="SXF" ng-model="to">-->
+    </div>
+</div>
+
+<div class="container" style="padding-top: 150px;">
+    <div class="row" ng-show="showlist">
+        <div class="col-md-3">
+            <div class="well" style="background: #251435; color: #fff;">
+
+                <a href="#" style="color: #fff;"><i class="fa fa-chevron-left"></i> Back</a>
+
+                <div class="form-group" style="margin-top: 40px;">
+                    <select class="form-control ca-select">
+                        <option>Select filter..</option>
+                        <option>Price (min > max)</option>
+                        <option>Price (max > min)</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="input-group">
-            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="date" is-open="status.opened" min-date="minDate" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-            <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-            </span>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Antal personer" ng-model="persons">
-        </div>
+        <div class="col-md-9">
 
-        <button type="submit" class="btn btn-success" ng-click="searchFlights()">Søg</button>
+            <div class="well-sm well-2" style="background: #0DA7C6; color: #fff; margin-bottom: 20px;">
+                {{resultCount}} results match your research.
+            </div>
 
-    </form>
 
-    <p style="margin-top:10px;"><b>Test datoer</b></p>
-    <ul>
-        <li><a href="" ng-click="paste('2016-01-07')">2016-01-07</a></li>
-        <li><a href="" ng-click="paste('2016-01-04')">2016-01-04</a></li>
-    </ul>
 
-    <hr>
+            <div ng-repeat="a in airlines">
+                <div class="well well-2" ng-repeat="d in a.flights">
 
-    <div class="list-group" ng-show="showlist" ng-repeat="a in airlines" >
-        <a href="" class="list-group-item active">
-            <h4 class="list-group-item-heading">{{a.airline}}</h4>
-        </a>
-        <div class="list-group-item" ng-repeat="d in a.flights">
-            <p><b>Fra:</b> {{d.origin}}</p>
-            <p><b>Til:</b> {{d.destination}}</p>
-            <p><b>Dato:</b> {{d.date.slice(0, 10)}}</p>
-            <p><b>Antal pladser tilbage:</b> {{d.numberOfSeats}}</p>
-            <p><b>Rejsetid:</b> {{d.traveltime}} min.</p>
-            <p><b>Total Pris:</b> {{d.totalPrice}}</p>
+                    <div class="row">
+                        <div class="col-md-3 text-center" style="border-right: 1px solid #DCDDDC; margin-bottom: 40px;">
+                            <p style="padding-top: 13px;"><b>{{a.airline}}</b></p>
+                        </div>
+                        <div class="col-md-3 text-center" style="margin-bottom: 40px;">
+                            <p>2015-12-01 <b>07:05</b></p>
+                            <small>{{d.origin}} <i class="fa fa-plane"></i></small>
+                        </div>
+                        <div class="col-md-3 text-center" style="border-right: 1px solid #DCDDDC; border-left: 1px solid #DCDDDC; margin-bottom: 40px;">
+                            <p style="color: #0DA7C6;"><b>{{d.traveltime}} hours</b></p>
+                            <small>Traveltime <i class="fa fa-clock-o"></i></small>
+                        </div>
+                        <div class="col-md-3 text-center" style="border-right: 1px solid #DCDDDC; margin-bottom: 40px;">
+                            <p>2015-22-01 <b>10:35</b></p>
+                            <small>{{d.destination}} <i class="fa fa-plane"></i></small>
+                        </div>
+                    </div>
 
-            <a href="#/view5" type="button" style="margin-top: 10px;" class="btn btn-success" ng-click="reserve(a.airline, d.origin, d.destination, d.date, d.numberOfSeats, d.traveltime, d.totalPrice)">Reserver</a>
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <p style="padding-top: 13px;">{{d.numberOfSeats}} Passengers <i class="fa fa-users"></i></p>
+                        </div>
+                        <div class="col-md-3 text-center">
+
+                        </div>
+                        <div class="col-md-3 text-center">
+
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#/view5" type="button" ng-click="reserve(a.airline, d.origin, d.destination, d.date, d.numberOfSeats, d.traveltime, d.totalPrice)">
+                                <div class="book-div2 pull-right" style="font-weight: bold;">{{d.totalPrice | currency}} <i class="fa fa-chevron-right"></i></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center" style="font-size: 16px; font-weight: bold; margin-top: 10px;"><span style="color: #0079B9;">no</span><span style="color: #E70369;">non</span><span style="color: #F97100;">do</span></p>
+            <p class="text-center" style="font-weight: normal; color: #8C8390; font-size: 11px; margin-top: -10px; margin-bottom: 10px;"><em>by Ismail Cam / Mazlum Sert / Alexander Nielsen</em></p>
 
         </div>
     </div>
 
-    <div class="alert alert-danger" role="alert" ng-show="alert">Fejl! Prøv venligst igen.</div>
+    <img src="app/view1/image/cube.svg" class="center-block" style="margin-top: 150px;" width="120" height="120" ng-show="loader">
 
-</div>
+</div><!-- /container -->

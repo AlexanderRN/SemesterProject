@@ -23,9 +23,20 @@ public class User {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Path("{user}/{pass}")
-  public void registerUser(@PathParam("user") String user, @PathParam("pass") String pass) {
+  public boolean registerUser(@PathParam("user") String user, @PathParam("pass") String pass) {
       UserFacade uf = new UserFacade();
       uf.registerUser(user, pass);
+
+      entity.User user1 = uf.getUserByUserId(user);
+      
+      if(user1 != null)
+      {
+          return true;
+      }
+      else
+      {
+          return false;
+      }
   }
  
 }

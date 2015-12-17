@@ -1,4 +1,4 @@
-<h1>Reservation</h1>
+<!--<h1>Reservation</h1>
 
 <div class="container">
 
@@ -23,7 +23,7 @@
                 <p><b>Airline:</b> {{reservation[0]}}</p>
                 <p><b>Fra:</b> {{reservation[1]}}</p>
                 <p><b>Til:</b> {{reservation[2]}}</p>
-                <p><b>Dato:</b> {{reservation[3].slice(0,10)}}</p>
+                <p><b>Dato:</b> {{reservation[3].slice(0, 10)}}</p>
                 <p><b>Antal Passagere:</b> {{reservation[4]}}</p>
                 <p><b>Rejsetid:</b> {{reservation[5]}} min.</p>
                 <p><b>TOTAL:</b> {{reservation[6]}} DKK</p>
@@ -31,4 +31,105 @@
         </div>
     </div>
 
-</div> <!-- /container -->
+</div>  /container -->
+
+
+
+
+
+<div class="container" style="padding-top: 50px;">
+    <div class="row">
+        <div class="col-md-9">
+
+            <div ng-show="showsignup">
+                <div ng-show="!isAuthenticated">
+                    <div class="well well-2" style="background: #0093B5; color: #fff;">
+                        <p style="font-size: 18px; margin-bottom: 0px;">Sign up <span class="pull-right"><button ng-click="showLogin()" class="btn btn-info btn-sm" type="button" style="border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border: none;">I have a account</button></span></p>
+                        <small>To make a reservation, you will need to register as a member during the reservation process. E-mail address and password will be required for membership reservation.</small>
+
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Email address" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Password" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="showlogin">
+                <form role="form" ng-show="!isAuthenticated" ng-submit="login()">
+                    <div class="well well-2" style="background: #0093B5; color: #fff;">
+                        <p style="font-size: 18px; margin-bottom: 0px;">Log in <span class="pull-right"><button ng-click="showSignup()" class="btn btn-info btn-sm" type="button" style="border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border: none;">Sign up</button></span></p>
+                        <small>Log in to your nonondo account</small>
+
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="username" ng-model="user.username" placeholder="Username" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" ng-model="user.password" placeholder="Password" autocomplete="off">
+                                </div>
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block btn-lg" style="border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border: none;">Log in</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </form>
+            </div>
+
+            <form name="resform" ng-model="resform">
+                <div ng-repeat="c in counter">
+                    <div class="well well-2">
+                        <p style="font-size: 16px;">{{c}}</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="firstname" ng-model="pasList[$index].firstname" placeholder="Firstname" autocomplete="off">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="lastname" ng-model="pasList[$index].lastname" placeholder="Lastname" autocomplete="off">
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <p class="text-center" style="font-size: 16px; font-weight: bold; margin-top: 10px;"><span style="color: #0079B9;">no</span><span style="color: #E70369;">non</span><span style="color: #F97100;">do</span></p>
+            <p class="text-center" style="font-weight: normal; color: #8C8390; font-size: 11px; margin-top: -10px; margin-bottom: 10px;"><em>by Ismail Cam / Mazlum Sert / Alexander Nielsen</em></p>
+
+        </div>
+        <div class="col-md-3">
+            <div class="well" style="background: #251336; color: #fff;">
+                <a href="#/view1" style="color: #fff;"><i class="fa fa-chevron-left"></i> Cancel</a>
+            </div>
+            <div class="well well-2">
+                <p style="font-size: 18px;">Flight info</p>
+                <p style="margin-bottom: 0px;">{{reservation[1]}} <small> - {{reservation[3].slice(0, 10)}} kl.10:45</small></p>
+                <small>{{reservation[0]}}</small>
+                <p style="margin-top: 14px;"><i class="fa fa-plane"></i> <small style="color: #0DA7C6;">{{reservation[5]}} min.</small></p>
+                <p style="margin-bottom: 0px;">{{reservation[2]}} <small> - {{reservation[3].slice(0, 10)}} kl.16:30</small></p>
+                <small>{{reservation[0]}}</small>
+                <hr>
+                <p>Passengers: <span class="pull-right">{{reservation[4]}}</span></p>
+                <hr>
+                <p class="pull-right" style="font-weight: bold; font-size: 24px; color: #EF1079">{{reservation[6]| currency}}</p>
+                <div class="clearfix"></div>
+            </div>
+            <button class="btn btn-success btn-block btn-lg" style="margin-bottom: 70px; border-radius: 0px; -webkit-border-radius: 0px; -moz-border-radius: 0px; border: none;" type="button" ng-click="test()">Continue <i class="fa fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+</div><!-- /container -->

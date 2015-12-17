@@ -36,17 +36,23 @@ public class Reservation implements Serializable {
     private Double price;
     private String res_date;
     private String traveltime;
-    private String username;
+    
+    @ManyToOne( fetch=FetchType.LAZY, cascade = CascadeType.PERSIST )
+    @JoinColumn(name = "username")
+    private User user;
     
     
-    @OneToMany(mappedBy = "reservation", fetch=FetchType.LAZY, cascade = CascadeType.PERSIST)
+    
+    @OneToMany( fetch=FetchType.LAZY, cascade = CascadeType.PERSIST )
+    @JoinColumn(name = "reservation_id")
     private List<Passenger> passengers = new ArrayList();
     
     
     public Reservation() {
     }
+    
 
-    public Reservation(String airline, String origin, int numberOfSeats, String destination, Double price, String res_date, String traveltime, List<Passenger> passengers, String username) {
+    public Reservation(String airline, String origin, int numberOfSeats, String destination, Double price, String res_date, String traveltime, List<Passenger> passengers, User user) {
         this.airline = airline;
         this.origin = origin;
         this.numberOfSeats = numberOfSeats;
@@ -55,7 +61,7 @@ public class Reservation implements Serializable {
         this.res_date = res_date;
         this.traveltime = traveltime;
         this.passengers = passengers;
-        this.username = username;
+        this.user = user;
     }
 
     public int getNumberOfSeats()
@@ -78,14 +84,14 @@ public class Reservation implements Serializable {
         this.airline = airline;
     }
     
-    public String getUsername()
+    public User getUsername()
     {
-        return username;
+        return user;
     }
 
-    public void setUsername( String username )
+    public void setUser( User user )
     {
-        this.username = username;
+        this.user = user;
     }
 
     public Double getPrice() {

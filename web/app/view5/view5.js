@@ -13,6 +13,22 @@ angular.module('myApp.view5', ['ngRoute'])
                 this.msgFromFactory = InfoFactory.getInfo();
                 this.msgFromService = InfoService.getInfo();
 
+                $scope.showlogin = false;
+                $scope.showsignup = true;
+
+                $scope.showLogin = function () {
+
+                    $scope.showlogin = true;
+                    $scope.showsignup = false;
+                };
+
+                $scope.showSignup = function () {
+
+                    $scope.showlogin = false;
+                    $scope.showsignup = true;
+                };
+
+
                 $scope.pasList = [];
 
                 $scope.reservation = reservationFactory.getInfo();
@@ -36,16 +52,46 @@ angular.module('myApp.view5', ['ngRoute'])
 
                 $scope.test = function () {
 
-                    //var firstnames = $scope.resform;
+                    if ($scope.isAuthenticated === true)
+                    {
+                        $scope.postReservation();
+                    }
+                    else
+                    {
+//                        $scope.username = $scope.regusername;
+//                        $scope.password = $scope.regpassword;
 
-                    //console.log($scope.pasList);
+                        if ($scope.register())
+                        {
+                            $scope.login();
+                        }
+                        //  $scope.postReservation();
 
-                    $scope.postReservation();
+                    }
 
-                    //var name = $scope.pasList[0].firstname + " " + $scope.pasList[0].lastname;
+                };
 
-                    //alert("Hej " + name + " din reservation er hermed gennemført!");
+                $scope.register = function () {
 
+                    var user = $scope.user.username;
+                    var pass = $scope.user.password;
+                    
+                    var check = false;
+                    
+                    console.log(user + ", " + pass);
+                    $http.post("api/demouser/" + user + "/" + pass) //Add rest url
+                            .success(function (data, status, headers, config)
+                            {
+                                $scope.msg = "User has been created";
+                                if(data == true){}
+                            })
+                            .error(function (data, status, headers, config)
+                            {
+                                $scope.msg = "Error occured while creating user, please try again later";
+                                return data;
+                            });
+                            
+                            return data;
                 };
 
                 $scope.postReservation = function () {
@@ -92,14 +138,14 @@ angular.module('myApp.view5', ['ngRoute'])
                     var passengerCount = reservationInfoAsArray[4].toString();
                     var traveltime = reservationInfoAsArray[5].toString();
                     var totalprice = reservationInfoAsArray[6].toString();
-                    
+
                     var url = 'api/reservation/';
                     var reservationInfo = reservationFactory.getInfo();
                     var passengersInfo = [];
 
                     for (var i = 0; i < passengerCount; i++)
                     {
-                        passengersInfo.push({ "firstname": $scope.pasList[i].firstname, "lastname": $scope.pasList[i].lastname });
+                        passengersInfo.push({"firstname": $scope.pasList[i].firstname, "lastname": $scope.pasList[i].lastname});
                     }
 
                     //var parameter = JSON.stringify(passengersInfo + reservationInfo);
@@ -117,12 +163,12 @@ angular.module('myApp.view5', ['ngRoute'])
                                     "numberOfSeats": passengerCount,
                                     "traveltime": traveltime,
                                     "totalprice": totalprice,
-                                    "username": "null"
+                                    "username": $scope.username
                                 }
                             };
-                    var pasJson = 
+                    var pasJson =
                             {
-                                "passengers": passengersInfo       
+                                "passengers": passengersInfo
                             };
 
                     $http({
@@ -131,11 +177,11 @@ angular.module('myApp.view5', ['ngRoute'])
                         headers: {'Content-Type': 'application/json'},
                         data: JSON.stringify(resJson)
                     })
-                    .success(function (data, status, headers, config) 
-                        {
-                            console.log(pasJson);
-                            console.log(data);
-                        });
+                            .success(function (data, status, headers, config)
+                            {
+                                console.log(pasJson);
+                                console.log(data);
+                            });
 
                 }; // RESERVATION FUNCTION END
 

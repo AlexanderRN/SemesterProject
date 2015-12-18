@@ -3,13 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="a"/>
-        <group>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/Role.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/security/JWTAuthenticationFilter.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/facades/UserFacade.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/entity/User.java</file>
-            <file>file:/Users/AlexanderNielsen/NetBeansProjects/semesterSeedFall2015/semesterSeedSP/src/java/deploy/DeploymentConfiguration.java</file>
-        </group>
         <group name="Semester 3 - Modul4 - MomondoProject">
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/entity/Reservation.java</file>
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/index.html</file>
@@ -42,5 +35,6 @@
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/src/java/facades/FlightFacade.java</file>
             <file>file:/Users/ismailcam/NetBeansProjects/Sem_3_Momondo_Project/SemesterProject/web/app/view7/view7.js</file>
         </group>
+        <group/>
     </open-files>
 </project-private>

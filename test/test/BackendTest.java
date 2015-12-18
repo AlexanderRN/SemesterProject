@@ -133,4 +133,51 @@ public class BackendTest {
                 statusCode(403).
                 body("error.message", equalTo("You are not authorized to perform the requested operation"));
     }
+    
+    // tester api metode getflights virker
+    @Test
+    public void testFlights1(){
+        given().
+                contentType("application/json").
+                when().
+                get("/fligthinfo/CPH/2015-12-12/2").
+                then().
+                statusCode(200);
+        
+    }
+    // Tester falske input
+    @Test
+    public void testFlights2(){
+        given().
+                contentType("application/json").
+                when().
+                get("/fligthinfo/kurdistan/2015-12-12/11").
+                then().
+                statusCode(401);
+        
+    }
+    // tester api metode getflightto virker
+    @Test
+    public void testFlightsto(){
+        given().
+                contentType("application/json").
+                when().
+                get("/fligthinfo/CPH/SXF/2015-12-12/5").
+                then().
+                statusCode(200);
+    }
+    
+    // tester api registeruser metode
+       @Test
+    public void Registerlogin() {
+        //Successful login
+        given().
+                contentType("application/json").
+                when().
+                post("/demouser/bo/hansen").
+                then().
+                statusCode(200);
+
+    }
+    
 }

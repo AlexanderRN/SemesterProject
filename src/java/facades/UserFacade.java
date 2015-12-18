@@ -29,9 +29,10 @@ public class UserFacade {
             em.close();
         }
     }
+    
     /*
-     Return the Roles if users could be authenticated, otherwise null
-     */
+    Return the Roles if users could be authenticated, otherwise null
+    */
 
     public List<String> authenticateUser(String userName, String password) {
         EntityManager em = emf.createEntityManager();

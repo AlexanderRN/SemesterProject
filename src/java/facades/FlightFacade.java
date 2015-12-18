@@ -37,16 +37,17 @@ public class FlightFacade
     {
         return emf.createEntityManager();
     }
-
-    public List<Flightinstance> getTrips( String origin )
+    
+    
+    public List<Flightinstance> getTrips(String origin)
     {
         EntityManager em = getEntityManager();
         String query1 = "SELECT fi FROM Flightinstance fi ";
         query1 += "JOIN fi.flight fif ";
         query1 += "JOIN fif.airline fia ";
         query1 += "WHERE fi.origin.iataCode = :o ";
-        Query query = em.createQuery( query1 );
-        query.setParameter( "o", origin );
+        Query query = em.createQuery(query1);
+        query.setParameter("o",origin);
         List<Flightinstance> list = query.getResultList();
         return list;
     }
@@ -65,7 +66,7 @@ public class FlightFacade
         Query query = em.createQuery( sql );
         return query.getResultList();
     }
-
+    
     public boolean setReservation( String airline, String origin, int numberOfSeats, String destination, Double price, String res_date, String traveltime, List<Passenger> passengers, String username )
     {
         EntityManager em = getEntityManager();
@@ -73,7 +74,7 @@ public class FlightFacade
         em.getTransaction().begin();
         Reservation r = new Reservation( airline, origin, numberOfSeats, destination, price, res_date, traveltime, passengers, em.find( User.class, username) );
 
-        em.persist( r );
+        em.persist(r);
         em.getTransaction().commit();
 
         return true;
